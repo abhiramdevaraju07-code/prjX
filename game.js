@@ -23,7 +23,7 @@ const SCENE_DATA = [
         name: 'Mountain Road',
         destination: 'DD Hills',
         heading: "The Ride",
-        message: "Early winter morning, and you stepped out after a shower.. effortless beauty! \nLoved DD Hills, deep talks and those quiet moments by the lake(Hope the secrets are safe xD). \nYou lilliputian wanted to ride the bike but feet are too small for it!🫵😂 \nAnd those Chocolate strawberries you made for me - small gesture, big impact! \nThat day showed me the how thoughtful you are!",
+        message: "Early winter morning, and you stepped out after a shower.. effortless beauty! \nLoved DD Hills, deep talks and those quite moments by the lake(Hope the secrets are safe xD). \nYou lilliputian wanted to ride the bike but feet are too small for it!🫵😂 \nAnd those Chocolate strawberries you made for me - small gesture, big impact! \nThat day showed me the how thoughtfull you are!",
         isMotorcycle: true
     },
     {
@@ -46,7 +46,7 @@ const SCENE_DATA = [
         name: 'Indiranagar Evening',
         destination: 'Bologna',
         heading: "Episode 6",
-        message: "New beginnings for us..\nPasta was the plan but you settled for some boring broccoli😔, thank god I came with pomegranates \nPhoto booth exposed my awkward side, but you casually looked stunning. \n And ya, Sushi debut was successful, wapis chalenge! \nAlso you riding the bike!, felt like Stuart Little in his toy car. Never seen someone learn that quick! \nYou just act underconfident to surprise everyone, some god level psychology xD \nManifesting a Competitive relationship!😂"
+        message: "New beginnings for us..\nPasta was the plan but you settled for some boring brocolli😔, thank god I came with pomegrantes \nPhoto booth exposed my awkward side, but you casually looked stunning. \n And ya, Sushi debut was successful, wapis chalenge! \nAlso you riding the bike!, felt like Stuart Little in his toy car. Never seen someone learn that quick! \nYou just act underconfident to surprise everyone, some god level psychology xD \nManifesting a Competitive relationship!😂"
     },
     {
         id: 'phoenix_mall',
@@ -195,6 +195,9 @@ const SCENE_MUSIC = {
     7: 'every-car-you-chase-snow-patrol-and-the-police-lyrics-jocelyn-sdl_rvGcfGIF.mp3', // Scene 8: Valentine
 };
 
+// Cinematic scene music (hero saves girl)
+const CINEMATIC_MUSIC = 'move-yeh-ishq-ishq-from-dhurandhar-shashwat-sachdev_ZubWiGxx.mp3';
+
 // ============================================
 // AUDIO MANAGEMENT
 // ============================================
@@ -206,6 +209,29 @@ function stopGlobalMusic() {
         currentAudio = null;
     }
     currentSceneMusic = -1;
+}
+
+function startCinematicMusic() {
+    // Stop any existing music
+    stopGlobalMusic();
+    
+    try {
+        currentAudio = new Audio(CINEMATIC_MUSIC);
+        currentAudio.loop = true;
+        currentAudio.volume = audioEnabled ? 0.5 : 0;
+        
+        const playPromise = currentAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Playing cinematic music: ' + CINEMATIC_MUSIC);
+                currentSceneMusic = 999; // Special marker for cinematic
+            }).catch(error => {
+                console.log('Cinematic audio autoplay blocked');
+            });
+        }
+    } catch (error) {
+        console.error('Error playing cinematic music:', error);
+    }
 }
 
 function startSceneMusic(sceneIndex) {
@@ -3999,6 +4025,10 @@ class GameScene extends Phaser.Scene {
         // Secret mode cinematic: Hero saves girl from dino
         // MUST MATCH SCENE 8 EXACTLY
         console.log('showHeroCinematic called');
+        
+        // Start cinematic music
+        startCinematicMusic();
+        
         const overlay = document.getElementById('hero-cinematic-overlay');
         overlay.classList.remove('hidden');
         
