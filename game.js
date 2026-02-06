@@ -23,7 +23,7 @@ const SCENE_DATA = [
         name: 'Mountain Road',
         destination: 'DD Hills',
         heading: "The Ride",
-        message: "Early winter morning, and you stepped out after a shower.. effortless beauty! \nLoved DD Hills, deep talks and those quite moments by the lake(Hope the secrets are safe xD). \nYou lilliputian wanted to ride the bike but feet are too small for it!🫵😂 \nAnd those Chocolate strawberries you made for me - small gesture, big impact! \nThat day showed me the how thoughtfull you are!",
+        message: "Early winter morning, and you stepped out after a shower.. effortless beauty! \nLoved DD Hills, deep talks and those quiet moments by the lake(Hope the secrets are safe xD). \nYou lilliputian wanted to ride the bike but feet are too small for it!🫵😂 \nAnd those Chocolate strawberries you made for me - small gesture, big impact! \nThat day showed me the how thoughtful you are!",
         isMotorcycle: true
     },
     {
@@ -46,7 +46,7 @@ const SCENE_DATA = [
         name: 'Indiranagar Evening',
         destination: 'Bologna',
         heading: "Episode 6",
-        message: "New beginnings for us..\nPasta was the plan but you settled for some boring brocolli😔, thank god I came with pomegrantes \nPhoto booth exposed my awkward side, but you casually looked stunning. \n And ya, Sushi debut was successful, wapis chalenge! \nAlso you riding the bike!, felt like Stuart Little in his toy car. Never seen someone learn that quick! \nYou just act underconfident to surprise everyone, some god level psychology xD \nManifesting a Competitive relationship!😂"
+        message: "New beginnings for us..\nPasta was the plan but you settled for some boring broccoli😔, thank god I came with pomegranates \nPhoto booth exposed my awkward side, but you casually looked stunning. \n And ya, Sushi debut was successful, wapis chalenge! \nAlso you riding the bike!, felt like Stuart Little in his toy car. Never seen someone learn that quick! \nYou just act underconfident to surprise everyone, some god level psychology xD \nManifesting a Competitive relationship!😂"
     },
     {
         id: 'phoenix_mall',
