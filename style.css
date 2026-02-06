@@ -1,0 +1,1158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ============================================
+   HOME SCREEN
+   ============================================ */
+#home-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#home-screen.hidden {
+    display: none;
+}
+
+#home-content {
+    text-align: center;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#game-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 20vw, 14rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.2),
+        0 0 40px rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+    letter-spacing: 15px;
+    background: linear-gradient(180deg, #ffffff 0%, #ffd4e5 50%, #ffb6c1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.5));
+    animation: titleFloat 4s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+#game-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+#start-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 600;
+    padding: 18px 60px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+    color: white;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 157, 0.4),
+        0 0 0 0 rgba(255, 107, 157, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 
+            0 10px 30px rgba(255, 107, 157, 0.4),
+            0 0 0 0 rgba(255, 107, 157, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 10px 30px rgba(255, 107, 157, 0.4),
+            0 0 0 15px rgba(255, 107, 157, 0);
+    }
+}
+
+#start-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(255, 107, 157, 0.5),
+        0 0 0 0 rgba(255, 107, 157, 0.4);
+}
+
+#start-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+#game-hint {
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
+
+/* PIN Entry Section */
+#pin-section {
+    margin: 25px 0;
+}
+
+#pin-label {
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+#pin-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pin-box {
+    width: 45px;
+    height: 55px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid rgba(255, 107, 157, 0.5);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.pin-box:focus {
+    border-color: #FF6B9D;
+    background: rgba(255, 107, 157, 0.2);
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
+    transform: scale(1.05);
+}
+
+.pin-box::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#pin-error {
+    color: #FF5252;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    animation: shake 0.5s ease;
+}
+
+#pin-error.hidden {
+    display: none;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+/* Floating hearts background */
+#floating-hearts-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: floatHeart linear infinite;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Rotate Device Message for Portrait Mode */
+#rotate-device {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.rotate-content {
+    text-align: center;
+    color: white;
+}
+
+.phone-icon {
+    font-size: 4rem;
+    animation: tiltPhone 1.5s ease-in-out infinite;
+}
+
+.rotate-arrow {
+    font-size: 3rem;
+    margin: 20px 0;
+    animation: rotateArrow 1.5s ease-in-out infinite;
+}
+
+.rotate-content p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+@keyframes tiltPhone {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(90deg); }
+}
+
+@keyframes rotateArrow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Show rotate message on portrait mobile */
+@media screen and (max-width: 900px) and (orientation: portrait) {
+    #rotate-device {
+        display: flex !important;
+    }
+    
+    #game-container,
+    #mobile-controls,
+    #audio-toggle,
+    #progress-container {
+        display: none !important;
+    }
+}
+
+#game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#game-container canvas {
+    display: block;
+    width: 100vw !important;
+    height: 100vh !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    object-fit: cover;
+}
+
+/* Modal Overlay */
+.hidden {
+    display: none !important;
+}
+
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#modal-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f0f8ff 100%);
+    border: 3px solid #4FC3F7;
+    border-radius: 20px;
+    padding: 40px 50px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(79, 195, 247, 0.4), inset 0 0 60px rgba(79, 195, 247, 0.05);
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#modal-text {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    white-space: pre-line;
+}
+
+.message-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #FF6B9D;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(255, 107, 157, 0.2);
+}
+
+.message-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+#modal-continue {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF8A80 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+}
+
+#modal-continue:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+}
+
+/* Game Over Overlay */
+#gameover-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.5s ease;
+}
+
+#gameover-card {
+    background: linear-gradient(145deg, #fff5f5 0%, #ffe0e6 100%);
+    border: 3px solid #ff6b9d;
+    border-radius: 20px;
+    padding: 40px 50px;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(255, 107, 157, 0.5);
+    animation: slideUp 0.5s ease;
+}
+
+#gameover-card h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    color: #c44569;
+    margin-bottom: 20px;
+}
+
+#gameover-card p {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.gameover-hint {
+    font-style: italic;
+    color: #888 !important;
+    font-size: 1rem !important;
+    margin-bottom: 30px !important;
+}
+
+#restart-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8a80 100%);
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(255, 107, 157, 0.5);
+    animation: pulse 2s infinite;
+}
+
+#restart-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 35px rgba(255, 107, 157, 0.7);
+}
+
+/* Valentine Overlay */
+#valentine-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    animation: fadeIn 1s ease;
+}
+
+#valentine-card {
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+#valentine-card h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3rem;
+    color: #c44569;
+    margin-bottom: 50px;
+    text-shadow: 0 4px 20px rgba(196, 69, 105, 0.3);
+}
+
+#valentine-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+#yes-btn, #no-btn {
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#yes-btn {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    box-shadow: 0 8px 30px rgba(56, 239, 125, 0.4);
+}
+
+#yes-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(56, 239, 125, 0.6);
+}
+
+#no-btn {
+    background: linear-gradient(135deg, #636e72 0%, #b2bec3 100%);
+    color: white;
+    box-shadow: 0 8px 30px rgba(99, 110, 114, 0.4);
+    position: relative;
+}
+
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatUp 4s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(80vh) scale(1);
+    }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Final Overlay */
+#final-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    animation: fadeIn 1.5s ease;
+}
+
+#final-content {
+    text-align: center;
+    animation: fadeIn 2s ease;
+}
+
+.final-text {
+    font-size: 1.8rem;
+    color: #c44569;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: textReveal 1s ease forwards;
+}
+
+.final-text:nth-child(1) { animation-delay: 0.5s; }
+.final-text:nth-child(2) { animation-delay: 1.5s; }
+
+@keyframes textReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#final-question {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    color: #c44569;
+    margin: 40px 0;
+    opacity: 0;
+    animation: textReveal 1s ease forwards;
+    animation-delay: 2.5s;
+    text-shadow: 0 4px 20px rgba(196, 69, 105, 0.3);
+}
+
+#final-yes-btn {
+    padding: 25px 70px;
+    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    opacity: 0;
+    animation: textReveal 1s ease forwards, glow 2s infinite;
+    animation-delay: 3.5s, 3.5s;
+    box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
+    transition: transform 0.3s ease;
+}
+
+#final-yes-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
+    }
+    50% {
+        box-shadow: 0 10px 60px rgba(255, 107, 157, 0.8), 0 0 100px rgba(255, 107, 157, 0.4);
+    }
+}
+
+#final-celebration {
+    text-align: center;
+}
+
+#final-celebration h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3rem;
+    color: #c44569;
+    animation: pulse 1.5s infinite;
+    text-shadow: 0 4px 30px rgba(196, 69, 105, 0.4);
+}
+
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ============================================
+   VALENTINE SUCCESS OVERLAY (Normal Mode)
+   ============================================ */
+#valentine-success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    animation: fadeIn 1s ease;
+}
+
+#valentine-success-overlay.hidden {
+    display: none !important;
+}
+
+#success-content {
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
+}
+
+.success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: #c44569;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 20px rgba(196, 69, 105, 0.4);
+    animation: pulse 1.5s infinite, fadeInUp 1s ease;
+}
+
+.success-line {
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #8e4a65;
+    margin: 15px 0;
+    opacity: 0;
+    animation: textReveal 0.8s ease forwards;
+}
+
+.success-line:nth-child(2) { animation-delay: 0.5s; }
+.success-line:nth-child(3) { animation-delay: 1s; }
+.success-line:nth-child(4) { animation-delay: 1.5s; }
+.success-line:nth-child(5) { animation-delay: 2s; }
+.success-line:nth-child(6) { animation-delay: 2.5s; }
+
+.success-highlight {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: #e91e63;
+    margin: 30px 0;
+    opacity: 0;
+    animation: textReveal 1s ease forwards, pulse 2s infinite;
+    animation-delay: 3s, 3s;
+    text-shadow: 0 4px 30px rgba(233, 30, 99, 0.5);
+}
+
+.success-footer {
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: #c44569;
+    margin-top: 40px;
+    opacity: 0;
+    animation: textReveal 1s ease forwards;
+    animation-delay: 4s;
+}
+
+#success-confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+/* ============================================
+   HERO CINEMATIC OVERLAY (Secret Mode)
+   ============================================ */
+#hero-cinematic-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #FFE4EC 0%, #FFB6C1 50%, #F8BBD9 100%);
+    z-index: 1003;
+}
+
+#hero-cinematic-overlay.hidden {
+    display: none !important;
+}
+
+#cinematic-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#cinematic-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Mobile Controls */
+#mobile-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
+    gap: 15px;
+    z-index: 100;
+    padding: 0 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(79, 195, 247, 0.4);
+    border: 3px solid rgba(79, 195, 247, 0.8);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.control-btn:active {
+    background: rgba(79, 195, 247, 0.7);
+    transform: scale(0.95);
+}
+
+#jump-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}
+
+#left-btn {
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+}
+
+#right-btn {
+    position: absolute;
+    left: 110px;
+    bottom: 0;
+}
+
+/* Audio Toggle */
+#audio-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(79, 195, 247, 0.4);
+    border: 2px solid rgba(79, 195, 247, 0.8);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+#audio-toggle:hover {
+    background: rgba(79, 195, 247, 0.6);
+    transform: scale(1.1);
+}
+
+/* Progress Hearts */
+#progress-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 10px rgba(255, 107, 157, 0.5));
+}
+
+.progress-heart {
+    transition: all 0.5s ease;
+}
+
+.progress-heart.filled {
+    animation: heartPop 0.5s ease;
+}
+
+@keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive - Landscape Mobile */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    #mobile-controls {
+        display: flex;
+    }
+    
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+    }
+    
+    #right-btn {
+        left: 100px;
+    }
+    
+    /* Home Screen - Mobile Landscape */
+    #home-content {
+        padding: 10px;
+    }
+    
+    #game-title {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        margin-bottom: 5px;
+        letter-spacing: 8px;
+    }
+    
+    #game-subtitle {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        margin-bottom: 15px;
+    }
+    
+    #pin-section {
+        margin: 10px 0;
+    }
+    
+    #pin-label {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+    
+    #pin-inputs {
+        gap: 6px;
+    }
+    
+    .pin-box {
+        width: 35px;
+        height: 42px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+    }
+    
+    #pin-error {
+        font-size: 0.7rem;
+        margin-top: 8px;
+    }
+    
+    #start-btn {
+        padding: 10px 35px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+    
+    #game-hint {
+        font-size: 0.6rem;
+        margin-top: 10px;
+    }
+    
+    #modal-card {
+        margin: 8px;
+        padding: 15px 20px;
+        max-width: 90vw;
+    }
+    
+    #modal-text {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+    
+    .message-heading {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .message-body {
+        font-size: 0.75rem;
+        line-height: 1.6;
+    }
+    
+    #modal-continue {
+        padding: 10px 25px;
+        font-size: 0.8rem;
+    }
+    
+    #gameover-card {
+        margin: 8px;
+        padding: 15px 20px;
+    }
+    
+    #gameover-card h1 {
+        font-size: 1.8rem;
+    }
+    
+    #gameover-card p {
+        font-size: 1rem;
+    }
+    
+    #restart-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+    
+    #valentine-card h1 {
+        font-size: 1.8rem;
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+    
+    #yes-btn, #no-btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+    
+    #final-question {
+        font-size: 1.5rem;
+        padding: 0 20px;
+    }
+    
+    #final-yes-btn {
+        padding: 15px 40px;
+        font-size: 1rem;
+    }
+    
+    .final-text {
+        font-size: 1.1rem;
+    }
+    
+    #progress-container {
+        font-size: 1.2rem;
+        top: 10px;
+        left: 10px;
+    }
+    
+    #audio-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Desktop responsive */
+@media (max-width: 800px) and (min-height: 600px) {
+    #mobile-controls {
+        display: flex;
+    }
+}
+
+/* Extra small landscape screens (iPhone SE, etc) */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+    #home-content {
+        padding: 5px;
+    }
+    
+    #game-title {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        margin-bottom: 2px;
+        letter-spacing: 5px;
+    }
+    
+    #game-subtitle {
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
+        margin-bottom: 8px;
+    }
+    
+    #pin-section {
+        margin: 5px 0;
+    }
+    
+    #pin-label {
+        font-size: 0.6rem;
+        margin-bottom: 5px;
+    }
+    
+    #pin-inputs {
+        gap: 5px;
+    }
+    
+    .pin-box {
+        width: 30px;
+        height: 36px;
+        font-size: 1rem;
+        border-radius: 6px;
+        border-width: 1.5px;
+    }
+    
+    #pin-error {
+        font-size: 0.6rem;
+        margin-top: 5px;
+    }
+    
+    #start-btn {
+        padding: 8px 25px;
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+    
+    #game-hint {
+        display: none;
+    }
+}
+
+/* Particles Background */
+.particle {
+    position: fixed;
+    pointer-events: none;
+    animation: particleFloat 6s infinite ease-in-out;
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}

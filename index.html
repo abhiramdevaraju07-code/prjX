@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="screen-orientation" content="landscape">
+    <meta name="x5-orientation" content="landscape">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Seven ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+</head>
+<body>
+    <!-- Rotate Device Message -->
+    <div id="rotate-device">
+        <div class="rotate-content">
+            <div class="phone-icon">📱</div>
+            <div class="rotate-arrow">↻</div>
+            <p>Please rotate your device to landscape mode</p>
+        </div>
+    </div>
+    
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <div id="home-content">
+            <h1 id="game-title">Seven</h1>
+            <p id="game-subtitle">A Journey of Love & Adventure</p>
+            
+            <!-- PIN Entry -->
+            <div id="pin-section">
+                <p id="pin-label">Enter last 4 digits of sender's number</p>
+                <div id="pin-inputs">
+                    <input type="tel" maxlength="1" class="pin-box" data-index="0" inputmode="numeric" pattern="[0-9]*">
+                    <input type="tel" maxlength="1" class="pin-box" data-index="1" inputmode="numeric" pattern="[0-9]*">
+                    <input type="tel" maxlength="1" class="pin-box" data-index="2" inputmode="numeric" pattern="[0-9]*">
+                    <input type="tel" maxlength="1" class="pin-box" data-index="3" inputmode="numeric" pattern="[0-9]*">
+                </div>
+                <p id="pin-error" class="hidden">❌ Incorrect code. Try again!</p>
+            </div>
+            
+            <button id="start-btn">Start</button>
+            <p id="game-hint">Use arrow keys or touch controls to move</p>
+        </div>
+        <div id="floating-hearts-bg"></div>
+    </div>
+    
+    <div id="game-container"></div>
+    
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="hidden">
+        <div id="modal-card">
+            <p id="modal-text"></p>
+            <button id="modal-continue">Continue</button>
+        </div>
+    </div>
+    
+    <!-- Game Over Overlay -->
+    <div id="gameover-overlay" class="hidden">
+        <div id="gameover-card">
+            <h1>💔 Oops!</h1>
+            <p>You missed the heart checkpoint!</p>
+            <p class="gameover-hint">Don't worry, love always finds a way...</p>
+            <button id="restart-btn">Try Again ❤️</button>
+        </div>
+    </div>
+    
+    <!-- Valentine Overlay -->
+    <div id="valentine-overlay" class="hidden">
+        <div id="valentine-card">
+            <h1>Will You Be My Valentine?</h1>
+            <div id="valentine-buttons">
+                <button id="yes-btn">YES ❤️</button>
+                <button id="no-btn">NO 😅</button>
+            </div>
+        </div>
+        <div id="confetti-container"></div>
+    </div>
+    
+    <!-- Valentine Success Overlay (Normal Mode Ending) -->
+    <div id="valentine-success-overlay" class="hidden">
+        <div id="success-content">
+            <h1 class="success-title">💖 Good Choice 💖</h1>
+
+            <p class="success-line">
+            I love the way you say “ayyy” when you’re a little mad —  
+            don’t stop, it’s my favourite sound 🫶
+            </p>
+
+            <p class="success-line">
+            Talking to you is honestly the best part of my day — everything just slows down.
+            </p>
+
+            <p class="success-line">
+            I’ve always loved bike rides…  
+            but riding with you makes them hit different 🏍️✨
+            </p>
+
+            <p class="success-line">
+            Because moments are nice,  
+            but moments with someone you love — they become memories.
+            </p>
+
+            <p class="success-line">
+            I love how caring, thoughtful, and understanding you are.  
+            That’s the part that makes me want *this*.
+            </p>
+
+            <h2 class="success-highlight">
+            More rides. More adventures.  
+            With you. Always. 💝
+            </h2>
+
+            <p class="success-footer">
+            Happy Valentine’s Day ❤️  
+            </p>
+
+        </div>
+        <div id="success-confetti-container"></div>
+    </div>
+    
+    <!-- Hero Cinematic Overlay (Secret Mode) -->
+    <div id="hero-cinematic-overlay" class="hidden">
+        <canvas id="cinematic-canvas"></canvas>
+    </div>
+    
+    <!-- Final Scene Overlay (Girlfriend Question - Secret Mode) -->
+    <div id="final-overlay" class="hidden">
+        <div id="final-content">
+            <p class="final-text">Not just today.</p>
+            <p class="final-text">Not just this week.</p>
+            <p class="final-text">But every random call,</p>
+            <p class="final-text">every bike ride,</p>
+            <p class="final-text">and every “aeyy” when you’re annoyed 😌</p>
+    
+            <h1 id="final-question">Would you like to be my Girlfriend?</h1>
+    
+            <button id="final-yes-btn">YES! ❤️</button>
+        </div>
+    
+        <div id="final-celebration" class="hidden">
+            <h1>We the Best xD ❤️</h1>
+            <p class="final-text">
+                You chose wisely 😌  
+                Batman & Passenger Princess arc unlocked 🦇🏍️
+            </p>
+            <div id="hearts-container"></div>
+        </div>
+    </div>
+    
+    <!-- Mobile Controls -->
+    <div id="mobile-controls">
+        <button id="left-btn" class="control-btn">◀</button>
+        <button id="right-btn" class="control-btn">▶</button>
+        <button id="jump-btn" class="control-btn">▲</button>
+    </div>
+    
+    <!-- Audio Toggle -->
+    <button id="audio-toggle">🔊</button>
+    
+    <!-- Progress Hearts -->
+    <div id="progress-container">
+        <span class="progress-heart" data-index="0">🤍</span>
+        <span class="progress-heart" data-index="1">🤍</span>
+        <span class="progress-heart" data-index="2">🤍</span>
+        <span class="progress-heart" data-index="3">🤍</span>
+        <span class="progress-heart" data-index="4">🤍</span>
+        <span class="progress-heart" data-index="5">🤍</span>
+        <span class="progress-heart" data-index="6">🤍</span>
+        <span class="progress-heart" data-index="7">🤍</span>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
